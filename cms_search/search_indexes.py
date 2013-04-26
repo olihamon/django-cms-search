@@ -72,8 +72,7 @@ def page_index_factory(language_code, proxy_model):
 
         def index_queryset(self):
             qs = proxy_model.objects.published().filter(title_set__language=language_code).distinct()
-            if 'publisher' in settings.INSTALLED_APPS:
-                qs = qs.filter(publisher_is_draft=True)
+            qs = qs.filter(publisher_is_draft=False)
             return qs
 
     return _PageIndex
